@@ -57,6 +57,7 @@ aside#spheres {
 }
 .rings > span > img {
     height: 100%;
+    transition: 0.5s;
 }
 
 #left .rings span {
