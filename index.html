@@ -23,6 +23,15 @@
 
         <link rel="stylesheet" href="./style.css" />
 
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker &&
+                        navigator.serviceWorker.register("./serviceworker.js");
+                });
+            }
+        </script>
+
         <title>Project Fruit PWA</title>
     </head>
     <body>
@@ -268,7 +277,7 @@
             }
         }
 
+        // Enable this when NFC is available
         //readTag();
     </script>
-    <script src="serviceworker.js"></script>
 </html>
