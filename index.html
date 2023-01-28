@@ -1,0 +1,239 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="./style.css" />
+
+        <title>Project Fruit PWA</title>
+    </head>
+    <body>
+        <section class="card" id="left">
+            <header>
+                <h1 class="item-title">Rött Äpple</h1>
+                <h2 class="item-sub-title">Svenskt</h2>
+            </header>
+
+            <section class="rings">
+                <span>
+                    <img
+                        class="energy"
+                        src="./images/l-circle-left.svg"
+                        alt="energy-contents"
+                    />
+                </span>
+                <span>
+                    <img
+                        class="transportation"
+                        src="./images/m-circle-left.svg"
+                        alt="co2 generated from transportation"
+                    />
+                </span>
+                <span>
+                    <img
+                        class="production"
+                        src="./images/s-circle-left.svg"
+                        alt="co2 generated from production"
+                    />
+                </span>
+            </section>
+        </section>
+        <section class="card" id="right">
+            <header>
+                <h1 class="item-title">Rött Äpple</h1>
+                <h2 class="item-sub-title">Svenskt</h2>
+            </header>
+
+            <section class="rings">
+                <span>
+                    <img
+                        class="energy"
+                        src="./images/l-circle-right.svg"
+                        alt="energy-contents"
+                    />
+                </span>
+                <span>
+                    <img
+                        class="transportation"
+                        src="./images/m-circle-right.svg"
+                        alt="co2 generated from transportation"
+                    />
+                </span>
+                <span>
+                    <img
+                        class="production"
+                        src="./images/s-circle-right.svg"
+                        alt="co2 generated from production"
+                    />
+                </span>
+            </section>
+        </section>
+        <aside id="spheres"></aside>
+    </body>
+
+    <script>
+        const spheres = document.getElementById("spheres");
+
+        //REMOVE WHEN NFC IS AVAILABLE
+        updateCard("right", "pear");
+        updateCard("right", "pear");
+        updateCard("right", "pear");
+        updateCard("left", "apple");
+        updateCard("left", "apple");
+        async function updateCard(cardPosition = "left", itemTitle) {
+            const item = await fetch(`./items/${itemTitle}.json`);
+            if (!item.ok) {
+                alert(`Could not find ${itemTitle}`);
+                return;
+            }
+            content = await item.json();
+
+            const card = document.getElementById(cardPosition);
+
+            const title = document.querySelector(
+                `#${cardPosition} .item-title`
+            );
+            title.innerText = content.title;
+
+            const subTitle = document.querySelector(
+                `#${cardPosition} .item-sub-title`
+            );
+            subTitle.innerText = content.subTitle;
+
+            rotateRing(cardPosition, "energy", content.energy);
+            rotateRing(cardPosition, "transportation", content.co2.transport);
+            rotateRing(cardPosition, "production", content.co2.production);
+
+            createNewSphere();
+            setSizeOfSpheres();
+        }
+
+        function createNewSphere() {
+            sphere = document.createElement("h2");
+            sphere.id = crypto.randomUUID();
+            sphere.innerText = content.title;
+            sphere.setAttribute(
+                "data-co2",
+                content.co2.transport + content.co2.production
+            );
+
+            if (spheres.childNodes.length > 0) {
+                if (spheres.childNodes.length > 3) {
+                    spheres.childNodes[spheres.childNodes.length - 1].remove();
+                }
+
+                spheres.insertBefore(sphere, spheres.childNodes[0]);
+            } else {
+                spheres.appendChild(sphere);
+            }
+        }
+
+        function setSizeOfSpheres() {
+            let sphereCo2Values = {};
+            for (index in spheres.childNodes) {
+                id = spheres.childNodes[index].id;
+                sphere = document.getElementById(id);
+
+                if (sphere != null) {
+                    const co2 = sphere.attributes["data-co2"].value;
+                    sphereCo2Values[sphere.id] = co2;
+                }
+            }
+
+            let largestCo2 = Math.max(...Object.values(sphereCo2Values));
+
+            for (index in spheres.childNodes) {
+                id = spheres.childNodes[index].id;
+                sphere = document.getElementById(id);
+
+                if (sphere != null) {
+                    const co2 = sphere.attributes["data-co2"].value;
+                    document
+                        .getElementById(sphere.id)
+                        .setAttribute(
+                            "style",
+                            `width: ${(co2 / largestCo2) * 100}%`
+                        );
+                }
+            }
+        }
+
+        function rotateRing(
+            cardPosition = "left",
+            ringName,
+            value,
+            ringMax = 100
+        ) {
+            const ring = document.querySelector(
+                `#${cardPosition} .rings .${ringName}`
+            );
+            ring.setAttribute("data-value", value);
+
+            if (value > ringMax) {
+                ringMax = value;
+
+                if (cardPosition === "left") {
+                    const otherRing = document.querySelector(
+                        `#right .rings .${ringName}`
+                    );
+                    const otherRingValue = otherRing.getAttribute("data-value");
+
+                    rotateRing("right", ringName, otherRingValue, value);
+                } else {
+                    const otherRing = document.querySelector(
+                        `#left .rings .${ringName}`
+                    );
+                    const otherRingValue = otherRing.getAttribute("data-value");
+
+                    rotateRing("left", ringName, otherRingValue, value);
+                }
+            }
+
+            let deg = (value / ringMax) * 180;
+            console.log(value, ringMax, deg);
+
+            if (cardPosition === "right") {
+                deg = -deg;
+            }
+
+            ring.style.transform = `rotate(${deg}deg)`;
+        }
+    </script>
+
+    <script>
+        sideToUpdate = left;
+        async function readTag() {
+            try {
+                const ndef = new NDEFReader();
+                await ndef.scan();
+                alert("> Scan started");
+
+                ndef.addEventListener("readingerror", () => {
+                    alert(
+                        "Argh! Cannot read data from the NFC tag. Try another one?"
+                    );
+                });
+
+                ndef.addEventListener(
+                    "reading",
+                    ({ message, serialNumber }) => {
+                        alert(`> Serial Number: ${serialNumber}`);
+                        alert(`> Records: (${message.records.length})`);
+
+                        updateCard(sideToUpdate, message);
+
+                        sideToUpdate =
+                            sideToUpdate == "left" ? "right" : "left";
+                    }
+                );
+            } catch (error) {
+                alert("Argh! " + error);
+            }
+        }
+
+        //readTag();
+    </script>
+
+    <script></script>
+</html>

@@ -1,0 +1,92 @@
+body {
+    background-color: #0f0f0f;
+    color: #fdfdfd;
+    font-family: "Courier New", Courier, monospace;
+
+    padding: 0;
+    margin: 1vh 1vw;
+
+    display: grid;
+    display: flex;
+}
+
+section#left {
+    flex: 1 1 100%;
+    direction: rtl;
+    overflow: hidden;
+}
+
+section#right {
+    flex: 1 1 100%;
+    direction: ltr;
+    overflow: hidden;
+}
+
+aside#spheres {
+    grid-area: spheres;
+}
+
+.card {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.card header {
+    width: 20rem;
+    margin: 1rem 0;
+    text-align: center;
+    background-color: #2f2f2f;
+}
+
+#right.card header {
+    border-radius: 0 1rem 1rem 0;
+}
+#left.card header {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.rings {
+    position: relative;
+    flex: 1 1 100%;
+}
+
+.rings span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+.rings > span > img {
+    height: 100%;
+}
+
+#left .rings span {
+    transform: translateX(50.1%);
+}
+
+#right .rings span {
+    transform: translateX(-50.1%);
+}
+
+aside#spheres {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-right: 2em;
+    width: 20vw;
+    align-items: center;
+    justify-content: center;
+}
+
+aside#spheres h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    background-color: aqua;
+    border-radius: 100vh;
+}
+
+aside#spheres h2[style*="100%"] {
+    background-color: red;
+}

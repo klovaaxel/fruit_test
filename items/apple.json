@@ -1,0 +1,9 @@
+{
+    "title": "Apple",
+    "subTitle": "Sweden",
+    "energy": 200,
+    "co2": {
+        "transport": 75,
+        "production": 50
+    }
+}
