@@ -4,6 +4,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Fruit" />
+        <meta name="apple-mobile-web-app-title" content="Fruit" />
+        <meta name="theme-color" content="0f0f0f" />
+        <meta name="msapplication-navbutton-color" content="0f0f0f" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="msapplication-starturl" content="/" />
+
+        <link rel="icon" sizes="512x512" href="images/logo.png" />
+        <link rel="apple-touch-icon" sizes="512x512" href="images/logo.png" />
+
+        <link rel="manifest" href="manifest.json" />
+
         <link rel="stylesheet" href="./style.css" />
 
         <title>Project Fruit PWA</title>
@@ -76,11 +93,8 @@
         const spheres = document.getElementById("spheres");
 
         //REMOVE WHEN NFC IS AVAILABLE
-        // updateCard("right", "pear");
-        // updateCard("right", "pear");
         updateCard("right", "pear");
         updateCard("left", "apple");
-        // updateCard("left", "apple");
         async function updateCard(cardPosition = "left", itemTitle) {
             const item = await fetch(`./items/${itemTitle}.json`);
             if (!item.ok) {

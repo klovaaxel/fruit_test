@@ -1,0 +1,15 @@
+{
+    "name": "Project Fruit",
+    "description": "A PWA to comapre the climate impact of diffrent products an raisa awerness about the impact we as individuals can have on the climate with our daily produce choices ",
+    "short_name": "Fruit",
+    "start_url": "/",
+    "lang": "sv-SE",
+    "theme_color": "#0f0f0f",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "images/logo.png",
+            "sizes": "512x512"
+        }
+    ]
+}
