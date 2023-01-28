@@ -76,11 +76,11 @@
         const spheres = document.getElementById("spheres");
 
         //REMOVE WHEN NFC IS AVAILABLE
-        updateCard("right", "pear");
-        updateCard("right", "pear");
+        // updateCard("right", "pear");
+        // updateCard("right", "pear");
         updateCard("right", "pear");
         updateCard("left", "apple");
-        updateCard("left", "apple");
+        // updateCard("left", "apple");
         async function updateCard(cardPosition = "left", itemTitle) {
             const item = await fetch(`./items/${itemTitle}.json`);
             if (!item.ok) {
@@ -105,12 +105,22 @@
             rotateRing(cardPosition, "transportation", content.co2.transport);
             rotateRing(cardPosition, "production", content.co2.production);
 
-            createNewSphere();
+            createNewSphere(content);
             setSizeOfSpheres();
         }
 
-        function createNewSphere() {
-            sphere = document.createElement("h2");
+        function createNewSphere(content) {
+            currentSpheres = document.querySelectorAll("#spheres h2");
+            if (currentSpheres.length > 0) {
+                for (index in currentSpheres) {
+                    const sphereText = currentSpheres[index].innerHTML;
+                    if (sphereText === content.title) {
+                        return;
+                    }
+                }
+            }
+
+            var sphere = document.createElement("h2");
             sphere.id = crypto.randomUUID();
             sphere.innerText = content.title;
             sphere.setAttribute(
@@ -163,15 +173,16 @@
             cardPosition = "left",
             ringName,
             value,
-            ringMax = 100
+            ringMax = 100,
+            reCalculateOtherRing = true
         ) {
             const ring = document.querySelector(
                 `#${cardPosition} .rings .${ringName}`
             );
             ring.setAttribute("data-value", value);
 
-            if (value > ringMax) {
-                ringMax = value;
+            if (reCalculateOtherRing) {
+                ringMax = value > ringMax ? value : ringMax;
 
                 if (cardPosition === "left") {
                     const otherRing = document.querySelector(
@@ -179,14 +190,26 @@
                     );
                     const otherRingValue = otherRing.getAttribute("data-value");
 
-                    rotateRing("right", ringName, otherRingValue, value);
+                    rotateRing(
+                        "right",
+                        ringName,
+                        otherRingValue,
+                        ringMax,
+                        false
+                    );
                 } else {
                     const otherRing = document.querySelector(
                         `#left .rings .${ringName}`
                     );
                     const otherRingValue = otherRing.getAttribute("data-value");
 
-                    rotateRing("left", ringName, otherRingValue, value);
+                    rotateRing(
+                        "left",
+                        ringName,
+                        otherRingValue,
+                        ringMax,
+                        false
+                    );
                 }
             }
 
