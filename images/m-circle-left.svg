@@ -24,8 +24,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.5287037"
-     inkscape:cx="124.94246"
-     inkscape:cy="148.16475"
+     inkscape:cx="-33.034525"
+     inkscape:cy="130.50273"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -52,7 +52,25 @@
      fit-margin-bottom="0"
      showguides="false" />
   <defs
-     id="defs2" />
+     id="defs2">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1579"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,1,1,0,1.3229167,0,1 @ F,0,1,1,0,1.3229167,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="5"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="true"
+       hide_knots="false" />
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
@@ -66,6 +84,8 @@
     <path
        id="path35801"
        style="fill:#ffff00;fill-opacity:1;stroke-width:3.4091;stroke-linecap:round;stroke-linejoin:round"
-       d="m 67.555567,73.124219 c 12.673178,1.34e-4 22.946786,10.273741 22.946919,22.94692 1.52e-4,12.673381 -10.273539,22.947301 -22.946919,22.947441 v -5.38469 c 9.699546,-2e-5 17.562497,-7.86321 17.562235,-17.562751 -2.2e-5,-9.699346 -7.86289,-17.562213 -17.562235,-17.562236 z" />
+       d="m 67.555567,73.124219 c 12.673178,1.34e-4 22.946786,10.273741 22.946919,22.94692 1.47e-4,12.229591 -9.566627,22.224831 -21.624729,22.909971 -0.729342,0.0414 -1.32219,-0.55482 -1.32219,-1.28545 v -2.73885 c 0,-0.73063 0.59326,-1.31771 1.321705,-1.37191 9.082184,-0.67578 16.24078,-8.25884 16.24053,-17.513761 -2.2e-5,-9.699346 -7.86289,-17.562213 -17.562235,-17.562236 z"
+       inkscape:path-effect="#path-effect1579"
+       inkscape:original-d="m 67.555567,73.124219 c 12.673178,1.34e-4 22.946786,10.273741 22.946919,22.94692 1.52e-4,12.673381 -10.273539,22.947301 -22.946919,22.947441 v -5.38469 c 9.699546,-2e-5 17.562497,-7.86321 17.562235,-17.562751 -2.2e-5,-9.699346 -7.86289,-17.562213 -17.562235,-17.562236 z" />
   </g>
 </svg>
