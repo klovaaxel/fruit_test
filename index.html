@@ -269,7 +269,7 @@
                         );
                         console.log(message);
 
-                        updateCard(sideToUpdate, message.records[0]);
+                        updateCard(sideToUpdate, message.records[0].data);
 
                         sideToUpdate =
                             sideToUpdate == "left" ? "right" : "left";
