@@ -265,9 +265,10 @@
                     ({ message, serialNumber }) => {
                         alert(`> Serial Number: ${serialNumber}`);
                         alert(
-                            `> Records: (${JSON.stringify(message.records)})`
+                            `> Records: (${JSON.stringify(
+                                message.records[0].data
+                            )})`
                         );
-                        console.log(message);
 
                         updateCard(sideToUpdate, message.records[0].data);
 
