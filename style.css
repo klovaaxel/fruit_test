@@ -54,6 +54,7 @@ aside#spheres {
     position: absolute;
     top: 0;
     bottom: 0;
+    width: min-content;
 }
 .rings > span > img {
     height: 100%;
