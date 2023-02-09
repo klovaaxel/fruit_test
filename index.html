@@ -265,7 +265,7 @@
                     ({ message, serialNumber }) => {
                         alert(`> Serial Number: ${serialNumber}`);
                         alert(
-                            `> Records: (${JSON.stringify(message.records)})`
+                            `> Records: (${JSON.stringify(message.records[0])})`
                         );
                         console.log(message);
 
