@@ -264,7 +264,8 @@
                     "reading",
                     ({ message, serialNumber }) => {
                         alert(`> Serial Number: ${serialNumber}`);
-                        alert(`> Records: (${message.records.length})`);
+                        alert(`> Records: (${message.records})`);
+                        console.log(message);
 
                         updateCard(sideToUpdate, message);
 

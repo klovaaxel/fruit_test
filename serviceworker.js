@@ -1,6 +1,9 @@
 // Set a name for the current cache
 var cacheName = "v2";
 
+caches.delete("v2");
+caches.delete("v1");
+
 // Default files to always cache
 var cacheFiles = ["./", "./index.html", "./style.css"];
 
