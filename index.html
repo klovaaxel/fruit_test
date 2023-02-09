@@ -266,7 +266,7 @@
                         alert(`> Serial Number: ${serialNumber}`);
                         alert(`> Record 1: (${message.records[0].data})`);
 
-                        updateCard(sideToUpdate, message.records[0].data);
+                        updateCard(sideToUpdate, message.records[0]);
 
                         sideToUpdate =
                             sideToUpdate == "left" ? "right" : "left";
