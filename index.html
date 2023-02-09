@@ -264,9 +264,11 @@
                     "reading",
                     ({ message, serialNumber }) => {
                         alert(`> Serial Number: ${serialNumber}`);
-                        alert(`> Record 2: (${message.records[0]})`);
+                        const decoder = new TextDecoder();
+                        const text = decoder.decode(message.records[0].data);
+                        alert(`> Record 2: (${text})`);
 
-                        updateCard(sideToUpdate, message.records[0]);
+                        updateCard(sideToUpdate, text);
 
                         sideToUpdate =
                             sideToUpdate == "left" ? "right" : "left";
