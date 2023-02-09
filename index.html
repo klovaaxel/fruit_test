@@ -252,7 +252,7 @@
             try {
                 const ndef = new NDEFReader();
                 await ndef.scan();
-                alert("> Scan started");
+                //alert("> Scan started");
 
                 ndef.addEventListener("readingerror", () => {
                     alert(
@@ -263,10 +263,10 @@
                 ndef.addEventListener(
                     "reading",
                     ({ message, serialNumber }) => {
-                        alert(`> Serial Number: ${serialNumber}`);
                         const decoder = new TextDecoder();
                         const text = decoder.decode(message.records[0].data);
-                        alert(`> Record 2: (${text})`);
+                        //alert(`> Serial Number: ${serialNumber}`);
+                        //alert(`> Record 2: (${text})`);
 
                         updateCard(sideToUpdate, text);
 
